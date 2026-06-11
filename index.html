@@ -419,15 +419,20 @@ ul{list-style:none}
           <p class="section-label">Cuándo nos encontramos</p>
           <h2 class="section-title">Horarios de<br/>apertura</h2>
           <div class="divider-gold"></div>
+          
+
           <div class="horarios-tabla">
-            <div class="horario-fila"><span class="horario-dia">Lunes</span><span class="horario-hora">09:00 – 13:00 / 16:00 – 20:30</span></div>
-            <div class="horario-fila"><span class="horario-dia">Martes</span><span class="horario-hora">09:00 – 13:00 / 16:00 – 20:30</span></div>
-            <div class="horario-fila"><span class="horario-dia">Miércoles</span><span class="horario-hora">09:00 – 13:00 / 16:00 – 20:30</span></div>
-            <div class="horario-fila"><span class="horario-dia">Jueves</span><span class="horario-hora">09:00 – 13:00 / 16:00 – 20:30</span></div>
-            <div class="horario-fila"><span class="horario-dia">Viernes <span class="horario-badge" style="margin-left:10px">Más popular</span></span><span class="horario-hora">09:00 – 13:30 / 15:30 – 21:00</span></div>
-            <div class="horario-fila"><span class="horario-dia">Sábado</span><span class="horario-hora">09:00 – 14:00</span></div>
-            <div class="horario-fila"><span class="horario-dia">Domingo</span><span class="horario-hora cerrado">Cerrado</span></div>
+            <div class="horario-fila"><span class="horario-dia">Lunes</span><span class="horario-hora">09:00 – 05:00 PM</span></div>
+            <div class="horario-fila"><span class="horario-dia">Martes</span><span class="horario-hora">09:00 – 05:00 PM</span></div>
+            <div class="horario-fila"><span class="horario-dia">Miércoles</span><span class="horario-hora">09:00 – 05:00 PM</span></div>
+            <div class="horario-fila"><span class="horario-dia">Jueves</span><span class="horario-hora">09:00 – 05:00 PM</span></div>
+            <div class="horario-fila"><span class="horario-dia">Viernes</span><span class="horario-hora">09:00 – 05:00 PM</span></div>
+            <div class="horario-fila"><span class="horario-dia">Sábado</span><span class="horario-hora cerrado">Cerrado</span></div>
+           <div class="horario-fila"><span class="horario-dia">Domingo</span><span class="horario-hora cerrado">Cerrado</span></div>
           </div>
+
+
+
           <div style="margin-top:36px"><button class="btn btn-outline" onclick="showPage('reserva')">Ver disponibilidad</button></div>
         </div>
       </div>
@@ -772,14 +777,16 @@ const SERVICIOS = [
 
 // Horarios reales por día de la semana (0=Dom, 1=Lun … 6=Sab)
 // Domingo siempre bloqueado en el calendario, así que no hace falta definirlo
+
 const HORARIO_SEMANAL = {
-  1: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00'],
-  2: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00'],
-  3: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00'],
-  4: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00'],
-  5: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30'],
-  6: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30'],
+  1: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
+  2: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
+  3: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
+  4: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
+  5: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
 };
+
+
 
 // Citas ya reservadas — clave: "YYYY-MM-DD", valor: array de horas ocupadas
 // Cuando conectes el backend, esto vendrá de tu base de datos
@@ -870,6 +877,8 @@ async function selFecha(fStr, key, diaSem, btn) {
 
 function cambiarMes(d) { calFecha.setMonth(calFecha.getMonth() + d); renderCal(); }
 
+
+
 function renderHoras(diaSem, key) {
   const grid = document.getElementById('horasGrid');
   if (diaSem === undefined) {
@@ -882,12 +891,24 @@ function renderHoras(diaSem, key) {
     grid.innerHTML = '<p style="color:var(--gris-claro);font-size:.85rem;grid-column:span 3;padding:8px 0">Cerrado este día</p>';
     return;
   }
+
+  // Verificar si la fecha seleccionada es hoy
+  const ahora    = new Date();
+  const horaActual = ahora.getHours() * 60 + ahora.getMinutes(); // minutos totales
+  const hoy      = `${ahora.getFullYear()}-${String(ahora.getMonth()+1).padStart(2,'0')}-${String(ahora.getDate()).padStart(2,'0')}`;
+  const esHoy    = key === hoy;
+
   grid.innerHTML = horas.map(h => {
-    const oc   = ocupadas.includes(h);
-    const sel  = estado.hora === h;
+    const [hh, mm]  = h.split(':').map(Number);
+    const minSlot   = hh * 60 + mm;
+    const pasada    = esHoy && minSlot <= horaActual; // bloquear si ya pasó
+    const oc        = ocupadas.includes(h) || pasada;
+    const sel       = estado.hora === h;
     return `<button class="hora-slot${oc?' ocupado':''}${sel?' seleccionado':''}" ${oc?'disabled':''} onclick="selHora('${h}',this)">${h}</button>`;
   }).join('');
 }
+
+
 
 function selHora(h, btn) {
   estado.hora = h;
