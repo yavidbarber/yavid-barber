@@ -492,15 +492,22 @@ ul{list-style:none}
             </div>
             <div class="contacto-item">
               <div class="contacto-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-              <div class="contacto-item-text"><h4>Horario</h4><p>Lun – Vie: 09:00 – 20:30<br/>Sábado: 09:00 – 14:00</p></div>
+              <div class="contacto-item-text"><h4>Horario</h4><p>Lun – Vie: 9:00 AM – 5:00 PM<br/>Sábado y Domingo: Cerrado</p></div>
             </div>
           </div>
         </div>
-        <div class="mapa-placeholder">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <p style="text-align:center;padding:0 24px;font-size:.85rem">Sustituye este bloque por un iframe de Google Maps</p>
-          <a href="https://maps.google.com/?q=Praderas+de+Ceiba+Norte+1+Juncos+Puerto+Rico" target="_blank" class="btn btn-outline" style="font-size:.75rem">Ver en Google Maps</a>
-        </div>
+        
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d100!2d-65.9003765!3d18.2227025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2spr!4v1"
+                  width="100%"
+                  height="400"
+                  style="border:0;border-radius:12px;filter:grayscale(20%)"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+
+
       </div>
     </div>
   </section>
@@ -778,14 +785,14 @@ const SERVICIOS = [
 // Horarios reales por día de la semana (0=Dom, 1=Lun … 6=Sab)
 // Domingo siempre bloqueado en el calendario, así que no hace falta definirlo
 
-const HORARIO_SEMANAL = {
-  1: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
-  2: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
-  3: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
-  4: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
-  5: ['09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'],
-};
 
+const HORARIO_SEMANAL = {
+  1: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM'],
+  2: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM'],
+  3: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM'],
+  4: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM'],
+  5: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM'],
+};
 
 
 // Citas ya reservadas — clave: "YYYY-MM-DD", valor: array de horas ocupadas
@@ -899,9 +906,15 @@ function renderHoras(diaSem, key) {
   const esHoy    = key === hoy;
 
   grid.innerHTML = horas.map(h => {
-    const [hh, mm]  = h.split(':').map(Number);
-    const minSlot   = hh * 60 + mm;
-    const pasada    = esHoy && minSlot <= horaActual; // bloquear si ya pasó
+    const convertir12a24 = (h) => {
+  const [time, period] = h.split(' ');
+  let [hh, mm] = time.split(':').map(Number);
+  if (period === 'PM' && hh !== 12) hh += 12;
+  if (period === 'AM' && hh === 12) hh = 0;
+  return hh * 60 + mm;
+};
+const minSlot = convertir12a24(h);
+const pasada  = esHoy && minSlot <= horaActual; // bloquear si ya pasó
     const oc        = ocupadas.includes(h) || pasada;
     const sel       = estado.hora === h;
     return `<button class="hora-slot${oc?' ocupado':''}${sel?' seleccionado':''}" ${oc?'disabled':''} onclick="selHora('${h}',this)">${h}</button>`;
