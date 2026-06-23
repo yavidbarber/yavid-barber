@@ -838,7 +838,7 @@ function renderCal() {
     const f      = new Date(año, mes, d);
     const diaSem = f.getDay(); // 0=dom
     const pasado = f < new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-    const cerrado = diaSem === 0 || !HORARIO_SEMANAL[diaSem]; // domingo o sin horario
+   const cerrado = !HORARIO_SEMANAL[diaSem];  // domingo o sin horario
     const key    = fechaAKey(año, mes, d);
     const fStr   = `${d} de ${MESES[mes]} de ${año}`;
     // Comprobar si todas las horas del día ya están ocupadas
