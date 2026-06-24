@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Panel — Yavid Barber</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --negro:#1A1A1A; --negro-medio:#2C2C2C; --gris:#3D3D3D;
+  --gris-claro:#7A7A7A; --dorado:#C9A84C; --dorado-suave:#E8C96A;
+  --crema:#F5F0E8; --rojo:#e07070; --verde:#6dbf8a;
+  --font-display:'Playfair Display',serif;
+  --font-body:'Inter',sans-serif;
+  --font-logo:'Dancing Script',cursive;
+  --t:.3s ease; --radius:6px; --radius-lg:12px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px}
+body{background:var(--negro);color:var(--crema);font-family:var(--font-body);min-height:100vh}
+
+/* ── LOGIN ── */
+#login-screen{
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:24px;
+}
+.login-box{
+  background:var(--negro-medio);border:1px solid var(--gris);
+  border-radius:var(--radius-lg);padding:48px 40px;
+  width:100%;max-width:380px;text-align:center;
+}
+.login-logo{font-family:var(--font-logo);font-size:2rem;color:var(--dorado);margin-bottom:4px}
+.login-logo span{color:var(--crema)}
+.login-sub{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gris-claro);margin-bottom:36px}
+.login-box input{
+  width:100%;background:var(--negro);border:1.5px solid var(--gris);
+  border-radius:var(--radius);padding:14px 16px;color:var(--crema);
+  font-family:var(--font-body);font-size:1rem;outline:none;
+  transition:border-color var(--t);text-align:center;letter-spacing:.2em;
+}
+.login-box input:focus{border-color:var(--dorado)}
+.login-box input::placeholder{letter-spacing:.05em;color:var(--gris-claro);opacity:.6}
+.login-btn{
+  width:100%;margin-top:16px;padding:14px;background:var(--dorado);
+  color:var(--negro);border:none;border-radius:var(--radius);
+  font-family:var(--font-body);font-size:.85rem;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+  transition:all var(--t);
+}
+.login-btn:hover{background:var(--dorado-suave)}
+.login-error{
+  margin-top:12px;font-size:.8rem;color:var(--rojo);
+  display:none;
+}
+
+/* ── PANEL ── */
+#panel-screen{display:none}
+
+.topbar{
+  background:var(--negro-medio);border-bottom:1px solid var(--gris);
+  padding:16px 24px;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.topbar-logo{font-family:var(--font-logo);font-size:1.5rem;color:var(--dorado)}
+.topbar-logo span{color:var(--crema)}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-fecha{font-size:.8rem;color:var(--gris-claro)}
+.logout-btn{
+  background:none;border:1px solid var(--gris);color:var(--gris-claro);
+  padding:8px 16px;border-radius:var(--radius);font-size:.75rem;
+  letter-spacing:.1em;text-transform:uppercase;cursor:pointer;
+  transition:all var(--t);font-family:var(--font-body);
+}
+.logout-btn:hover{border-color:var(--rojo);color:var(--rojo)}
+
+.panel-content{max-width:1100px;margin:0 auto;padding:40px 24px}
+
+/* Estadísticas */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:48px}
+.stat-card{
+  background:var(--negro-medio);border:1px solid var(--gris);
+  border-radius:var(--radius-lg);padding:24px;
+}
+.stat-label{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gris-claro);margin-bottom:8px}
+.stat-valor{font-family:var(--font-display);font-size:2.5rem;font-weight:700;color:var(--dorado)}
+.stat-sub{font-size:.8rem;color:var(--gris-claro);margin-top:4px}
+
+/* Filtros */
+.filtros{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;align-items:center}
+.filtro-btn{
+  padding:8px 20px;border:1px solid var(--gris);background:none;
+  color:var(--gris-claro);border-radius:20px;font-size:.8rem;
+  cursor:pointer;transition:all var(--t);font-family:var(--font-body);
+}
+.filtro-btn.activo,.filtro-btn:hover{border-color:var(--dorado);color:var(--dorado)}
+.filtro-btn.activo{background:rgba(201,168,76,.1)}
+
+.buscar{
+  margin-left:auto;background:var(--negro-medio);border:1px solid var(--gris);
+  border-radius:var(--radius);padding:8px 16px;color:var(--crema);
+  font-family:var(--font-body);font-size:.85rem;outline:none;
+  transition:border-color var(--t);width:200px;
+}
+.buscar:focus{border-color:var(--dorado)}
+.buscar::placeholder{color:var(--gris-claro);opacity:.6}
+
+/* Sección título */
+.seccion-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.seccion-titulo{font-family:var(--font-display);font-size:1.4rem;font-weight:700}
+.seccion-count{font-size:.8rem;color:var(--gris-claro)}
+
+/* Tabla de citas */
+.citas-lista{display:flex;flex-direction:column;gap:12px}
+
+.cita-card{
+  background:var(--negro-medio);border:1px solid var(--gris);
+  border-radius:var(--radius-lg);padding:20px 24px;
+  display:grid;grid-template-columns:1fr 1fr 1fr auto;
+  gap:16px;align-items:center;transition:border-color var(--t);
+}
+.cita-card:hover{border-color:rgba(201,168,76,.3)}
+.cita-card.hoy{border-left:3px solid var(--dorado)}
+.cita-card.completada{opacity:.5}
+
+.cita-cliente h4{font-size:.95rem;font-weight:600;margin-bottom:4px}
+.cita-cliente p{font-size:.8rem;color:var(--gris-claro)}
+.cita-cliente a{color:var(--dorado);font-size:.8rem}
+
+.cita-servicio{font-size:.9rem;color:var(--crema)}
+.cita-precio{font-family:var(--font-display);font-size:1.1rem;color:var(--dorado);font-weight:700}
+
+.cita-fecha-hora{text-align:center}
+.cita-fecha{font-size:.85rem;color:var(--gris-claro);margin-bottom:4px}
+.cita-hora{font-size:1rem;font-weight:600;color:var(--crema)}
+
+.cita-acciones{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.btn-accion{
+  padding:6px 14px;border-radius:var(--radius);font-size:.75rem;
+  font-weight:600;letter-spacing:.05em;cursor:pointer;border:none;
+  font-family:var(--font-body);transition:all var(--t);white-space:nowrap;
+}
+.btn-completar{background:rgba(109,191,138,.15);color:var(--verde);border:1px solid rgba(109,191,138,.3)}
+.btn-completar:hover{background:rgba(109,191,138,.25)}
+.btn-borrar{background:rgba(224,112,112,.1);color:var(--rojo);border:1px solid rgba(224,112,112,.25)}
+.btn-borrar:hover{background:rgba(224,112,112,.2)}
+
+.cita-ref{font-size:.7rem;color:var(--gris);margin-top:4px;text-align:right}
+
+/* Badge hoy */
+.badge-hoy{
+  display:inline-block;padding:2px 8px;background:rgba(201,168,76,.15);
+  border:1px solid rgba(201,168,76,.3);border-radius:20px;
+  font-size:.65rem;color:var(--dorado);letter-spacing:.1em;
+  text-transform:uppercase;margin-left:8px;vertical-align:middle;
+}
+
+/* Estado vacío */
+.vacio{
+  text-align:center;padding:64px 24px;color:var(--gris-claro);
+}
+.vacio svg{width:48px;height:48px;color:var(--gris);margin:0 auto 16px;display:block}
+.vacio p{font-size:.9rem}
+
+/* Loading */
+.loading{text-align:center;padding:48px;color:var(--gris-claro);font-size:.9rem}
+
+/* Modal confirmación borrar */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.7);
+  display:flex;align-items:center;justify-content:center;
+  z-index:1000;display:none;
+}
+.modal-overlay.visible{display:flex}
+.modal{
+  background:var(--negro-medio);border:1px solid var(--gris);
+  border-radius:var(--radius-lg);padding:36px;max-width:380px;
+  width:90%;text-align:center;
+}
+.modal h3{font-family:var(--font-display);font-size:1.3rem;margin-bottom:12px}
+.modal p{font-size:.9rem;color:var(--gris-claro);margin-bottom:28px}
+.modal-btns{display:flex;gap:12px;justify-content:center}
+
+/* Notas */
+.cita-notas{font-size:.75rem;color:var(--gris-claro);margin-top:4px;font-style:italic}
+
+@media(max-width:768px){
+  .cita-card{grid-template-columns:1fr 1fr;gap:12px}
+  .cita-acciones{flex-direction:row;align-items:center}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .buscar{width:100%;margin-left:0}
+}
+@media(max-width:480px){
+  .cita-card{grid-template-columns:1fr}
+  .topbar-fecha{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Yavid <span>Barber</span></div>
+    <p class="login-sub">Panel de administración</p>
+    <input type="password" id="pwd-input" placeholder="Contraseña" onkeydown="if(event.key==='Enter')login()"/>
+    <button class="login-btn" onclick="login()">Entrar</button>
+    <p class="login-error" id="login-error">Contraseña incorrecta</p>
+  </div>
+</div>
+
+<!-- ── PANEL ── -->
+<div id="panel-screen">
+
+  <div class="topbar">
+    <div class="topbar-logo">Yavid <span>Barber</span></div>
+    <div class="topbar-right">
+      <span class="topbar-fecha" id="fecha-hoy"></span>
+      <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <div class="panel-content">
+
+    <!-- Estadísticas -->
+    <div class="stats-grid" id="stats-grid">
+      <div class="stat-card">
+        <p class="stat-label">Citas hoy</p>
+        <p class="stat-valor" id="stat-hoy">—</p>
+        <p class="stat-sub">programadas</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Esta semana</p>
+        <p class="stat-valor" id="stat-semana">—</p>
+        <p class="stat-sub">citas totales</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Este mes</p>
+        <p class="stat-valor" id="stat-mes">—</p>
+        <p class="stat-sub">citas totales</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Ingresos este mes</p>
+        <p class="stat-valor" id="stat-ingresos">—</p>
+        <p class="stat-sub">estimados</p>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filtros">
+      <button class="filtro-btn activo" onclick="filtrar('todas',this)">Todas</button>
+      <button class="filtro-btn" onclick="filtrar('hoy',this)">Hoy</button>
+      <button class="filtro-btn" onclick="filtrar('semana',this)">Esta semana</button>
+      <button class="filtro-btn" onclick="filtrar('mes',this)">Este mes</button>
+      <input class="buscar" type="text" placeholder="Buscar cliente…" oninput="buscar(this.value)"/>
+    </div>
+
+    <!-- Lista de citas -->
+    <div class="seccion-header">
+      <h2 class="seccion-titulo">Citas</h2>
+      <span class="seccion-count" id="citas-count"></span>
+    </div>
+
+    <div id="citas-lista" class="citas-lista">
+      <div class="loading">Cargando citas…</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal borrar -->
+<div class="modal-overlay" id="modal-borrar">
+  <div class="modal">
+    <h3>¿Borrar esta cita?</h3>
+    <p>Esta acción no se puede deshacer.</p>
+    <div class="modal-btns">
+      <button class="btn-accion btn-borrar" onclick="confirmarBorrar()">Sí, borrar</button>
+      <button class="btn-accion" style="background:var(--gris);color:var(--crema);border:none" onclick="cerrarModal()">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, deleteDoc, doc, updateDoc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAEVDcgT8iAH0tFv9WzeXpofNBJETDfsUQ",
+    authDomain: "yavidbarber-25d7b.firebaseapp.com",
+    projectId: "yavidbarber-25d7b",
+    storageBucket: "yavidbarber-25d7b.firebasestorage.app",
+    messagingSenderId: "530881576659",
+    appId: "1:530881576659:web:a5d06131ba41e71be8de26"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  window._fbCargarCitas = async () => {
+    const q    = query(collection(db, 'citas'), orderBy('creadoEn', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  };
+
+  window._fbBorrarCita = async (id) => {
+    await deleteDoc(doc(db, 'citas', id));
+  };
+
+  window._fbCompletarCita = async (id) => {
+    await updateDoc(doc(db, 'citas', id), { completada: true });
+  };
+
+  window._firebaseReady = true;
+</script>
+
+<script>
+const PASSWORD = 'yavid07';
+let todasLasCitas = [];
+let citaABorrar   = null;
+let filtroActual  = 'todas';
+let busquedaActual = '';
+
+// ── LOGIN ──
+function login() {
+  const val = document.getElementById('pwd-input').value;
+  if (val === PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('panel-screen').style.display = 'block';
+    iniciarPanel();
+  } else {
+    const err = document.getElementById('login-error');
+    err.style.display = 'block';
+    setTimeout(() => err.style.display = 'none', 3000);
+  }
+}
+
+function logout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('panel-screen').style.display = 'none';
+  document.getElementById('pwd-input').value = '';
+}
+
+// ── PANEL ──
+async function iniciarPanel() {
+  // Fecha de hoy
+  const hoy = new Date();
+  document.getElementById('fecha-hoy').textContent = hoy.toLocaleDateString('es-PR', {
+    weekday:'long', year:'numeric', month:'long', day:'numeric'
+  });
+
+  // Cargar citas
+  await cargarCitas();
+}
+
+async function cargarCitas() {
+  document.getElementById('citas-lista').innerHTML = '<div class="loading">Cargando citas…</div>';
+  try {
+    todasLasCitas = await window._fbCargarCitas();
+    actualizarEstadisticas();
+    renderCitas();
+  } catch (err) {
+    document.getElementById('citas-lista').innerHTML = '<div class="loading">Error al cargar las citas. Recarga la página.</div>';
+    console.error(err);
+  }
+}
+
+function actualizarEstadisticas() {
+  const hoy    = new Date();
+  const keyHoy = fechaKey(hoy);
+
+  // Inicio de semana (lunes)
+  const lunes  = new Date(hoy);
+  lunes.setDate(hoy.getDate() - ((hoy.getDay() + 6) % 7));
+
+  // Inicio de mes
+  const inicioMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+
+  const citasHoy    = todasLasCitas.filter(c => c.fechaKey === keyHoy);
+  const citasSemana = todasLasCitas.filter(c => c.fechaKey && c.fechaKey >= fechaKey(lunes));
+  const citasMes    = todasLasCitas.filter(c => c.fechaKey && c.fechaKey >= fechaKey(inicioMes));
+
+  const ingresos = citasMes.reduce((sum, c) => {
+    const n = parseFloat((c.precio || '').replace('$','')) || 0;
+    return sum + n;
+  }, 0);
+
+  document.getElementById('stat-hoy').textContent      = citasHoy.length;
+  document.getElementById('stat-semana').textContent   = citasSemana.length;
+  document.getElementById('stat-mes').textContent      = citasMes.length;
+  document.getElementById('stat-ingresos').textContent = '$' + ingresos.toFixed(0);
+}
+
+function fechaKey(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function filtrar(tipo, btn) {
+  filtroActual = tipo;
+  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('activo'));
+  btn.classList.add('activo');
+  renderCitas();
+}
+
+function buscar(val) {
+  busquedaActual = val.toLowerCase();
+  renderCitas();
+}
+
+function getCitasFiltradas() {
+  const hoy    = new Date();
+  const keyHoy = fechaKey(hoy);
+
+  const lunes  = new Date(hoy);
+  lunes.setDate(hoy.getDate() - ((hoy.getDay() + 6) % 7));
+
+  const inicioMes = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+
+  let citas = [...todasLasCitas];
+
+  if (filtroActual === 'hoy')    citas = citas.filter(c => c.fechaKey === keyHoy);
+  if (filtroActual === 'semana') citas = citas.filter(c => c.fechaKey >= fechaKey(lunes));
+  if (filtroActual === 'mes')    citas = citas.filter(c => c.fechaKey >= fechaKey(inicioMes));
+
+  if (busquedaActual) {
+    citas = citas.filter(c =>
+      (c.nombre||'').toLowerCase().includes(busquedaActual) ||
+      (c.email||'').toLowerCase().includes(busquedaActual) ||
+      (c.telefono||'').includes(busquedaActual)
+    );
+  }
+
+  return citas;
+}
+
+function renderCitas() {
+  const hoy    = new Date();
+  const keyHoy = fechaKey(hoy);
+  const citas  = getCitasFiltradas();
+  const lista  = document.getElementById('citas-lista');
+
+  document.getElementById('citas-count').textContent = `${citas.length} cita${citas.length !== 1 ? 's' : ''}`;
+
+  if (citas.length === 0) {
+    lista.innerHTML = `
+      <div class="vacio">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <p>No hay citas para mostrar</p>
+      </div>`;
+    return;
+  }
+
+  lista.innerHTML = citas.map(c => {
+    const esHoy      = c.fechaKey === keyHoy;
+    const completada = c.completada === true;
+    return `
+      <div class="cita-card${esHoy ? ' hoy' : ''}${completada ? ' completada' : ''}">
+        <div class="cita-cliente">
+          <h4>${c.nombre || '—'}${esHoy ? '<span class="badge-hoy">Hoy</span>' : ''}</h4>
+          <p>${c.email || ''}</p>
+          <a href="tel:${c.telefono}">${c.telefono || ''}</a>
+          ${c.notas && c.notas !== 'Ninguna' ? `<p class="cita-notas">📝 ${c.notas}</p>` : ''}
+        </div>
+        <div>
+          <div class="cita-servicio">${c.servicio || '—'}</div>
+          <div class="cita-precio">${c.precio || '—'}</div>
+        </div>
+        <div class="cita-fecha-hora">
+          <div class="cita-fecha">${c.fecha || '—'}</div>
+          <div class="cita-hora">${c.hora || '—'}</div>
+        </div>
+        <div class="cita-acciones">
+          ${!completada ? `<button class="btn-accion btn-completar" onclick="completar('${c.id}')">✓ Completada</button>` : '<span style="font-size:.75rem;color:var(--verde)">✓ Completada</span>'}
+          <button class="btn-accion btn-borrar" onclick="abrirModal('${c.id}')">🗑 Borrar</button>
+          <div class="cita-ref">${c.referencia || ''}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ── ACCIONES ──
+async function completar(id) {
+  try {
+    await window._fbCompletarCita(id);
+    const cita = todasLasCitas.find(c => c.id === id);
+    if (cita) cita.completada = true;
+    renderCitas();
+  } catch (err) {
+    alert('Error al actualizar la cita.');
+    console.error(err);
+  }
+}
+
+function abrirModal(id) {
+  citaABorrar = id;
+  document.getElementById('modal-borrar').classList.add('visible');
+}
+
+function cerrarModal() {
+  citaABorrar = null;
+  document.getElementById('modal-borrar').classList.remove('visible');
+}
+
+async function confirmarBorrar() {
+  if (!citaABorrar) return;
+  try {
+    await window._fbBorrarCita(citaABorrar);
+    todasLasCitas = todasLasCitas.filter(c => c.id !== citaABorrar);
+    cerrarModal();
+    actualizarEstadisticas();
+    renderCitas();
+  } catch (err) {
+    alert('Error al borrar la cita.');
+    console.error(err);
+  }
+}
+
+// Cerrar modal al hacer clic fuera
+document.getElementById('modal-borrar').addEventListener('click', function(e) {
+  if (e.target === this) cerrarModal();
+});
+</script>
+</body>
+</html>
