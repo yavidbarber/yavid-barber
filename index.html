@@ -392,11 +392,14 @@ ul{list-style:none}
         <p class="section-label">Lo que hacemos</p>
         <h2 class="section-title">Nuestros servicios</h2>
         <div class="divider-gold"></div>
-        <p style="color:var(--gris-claro);max-width:480px;font-size:.95rem;line-height:1.8">Cada servicio es realizado con productos premium y técnicas perfeccionadas durante años. Todo servicio adicional al recorte, como barba, cejas u otros, tendrá un costo extra que se añadirá al precio del recorte.
+        <p style="color:var(--gris-claro);max-width:480px;font-size:.95rem;line-height:1.8">Cada servicio es realizado con productos premium y técnicas perfeccionadas durante años. El arreglo de barba y cejas tienen un costo adicional de $5 cada uno.
         </p>
       </div>
       <div class="servicios-grid">
         <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte de Preferencia</h3><p class="servicio-desc">El corte que tú eliges, adaptado a tu estilo y preferencia personal.</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
+        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte + Barba</h3><p class="servicio-desc">Recorte de preferencia más arreglo de barba incluido.</p><p class="servicio-precio">$25 <span>/ 30 min</span></p></div>
+        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte + Cejas</h3><p class="servicio-desc">Recorte de preferencia más arreglo de cejas incluido.</p><p class="servicio-precio">$25 <span>/ 30 min</span></p></div>
+        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte + Barba y Cejas</h3><p class="servicio-desc">Recorte de preferencia más arreglo de barba y cejas incluido.</p><p class="servicio-precio">$30 <span>/ 30 min</span></p></div>
         <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Fade</h3><p class="servicio-desc">Degradado a máquina con transiciones perfectas de bajo a alto.</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
         <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Taper</h3><p class="servicio-desc">Corte con degradado suave y natural hacia los lados y la nuca.</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
         <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Blowout</h3><p class="servicio-desc">Volumen y definición con acabado limpio y profesional.</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
@@ -421,13 +424,13 @@ ul{list-style:none}
           
 
           <div class="horarios-tabla">
-            <div class="horario-fila"><span class="horario-dia">Lunes</span><span class="horario-hora">9:00 AM – 7:00 PM</span></div>
-            <div class="horario-fila"><span class="horario-dia">Martes</span><span class="horario-hora">9:00 AM – 7:00 PM</span></div>
-            <div class="horario-fila"><span class="horario-dia">Miércoles</span><span class="horario-hora">9:00 AM – 7:00 PM</span></div>
-            <div class="horario-fila"><span class="horario-dia">Jueves</span><span class="horario-hora">9:00 AM – 7:00 PM</span></div>
-            <div class="horario-fila"><span class="horario-dia">Viernes</span><span class="horario-hora">9:00 AM – 7:00 PM</span></div>
-            <div class="horario-fila"><span class="horario-dia">Sábado</span><span class="horario-hora">9:00 AM – 7:00 PM</span></div>
-            <div class="horario-fila"><span class="horario-dia">Domingo</span><span class="horario-hora">9:00 AM – 7:00 PM</span></div>
+            <div class="horario-fila"><span class="horario-dia">Lunes</span><span class="horario-hora">9:00 AM – 6:00 PM</span></div>
+              <div class="horario-fila"><span class="horario-dia">Martes</span><span class="horario-hora">9:00 AM – 6:00 PM</span></div>
+              <div class="horario-fila"><span class="horario-dia">Miércoles</span><span class="horario-hora">9:00 AM – 6:00 PM</span></div>
+              <div class="horario-fila"><span class="horario-dia">Jueves</span><span class="horario-hora">9:00 AM – 6:00 PM</span></div>
+              <div class="horario-fila"><span class="horario-dia">Viernes</span><span class="horario-hora">9:00 AM – 6:00 PM</span></div>
+              <div class="horario-fila"><span class="horario-dia">Sábado</span><span class="horario-hora">9:00 AM – 6:00 PM</span></div>
+              <div class="horario-fila"><span class="horario-dia">Domingo</span><span class="horario-hora">9:00 AM – 6:00 PM</span></div>
           </div>
 
 
@@ -773,10 +776,13 @@ initCarousel();
 
 // ── RESERVAS ──
 const SERVICIOS = [
-  { id:'preferencia', nombre:'Recorte de Preferencia', precio:20, duracion:'30 min', icono:'💈' },
-  { id:'fade',        nombre:'Fade',                   precio:20, duracion:'30 min', icono:'💈' },
-  { id:'taper',       nombre:'Taper',                  precio:20, duracion:'30 min', icono:'💈' },
-  { id:'blowout',     nombre:'Blowout',                precio:20, duracion:'30 min', icono:'💈' },
+  { id:'preferencia',        nombre:'Recorte de Preferencia',        precio:20, duracion:'30 min', icono:'💈' },
+  { id:'preferencia-barba',  nombre:'Recorte + Barba',               precio:25, duracion:'30 min', icono:'💈' },
+  { id:'preferencia-cejas',  nombre:'Recorte + Cejas',               precio:25, duracion:'30 min', icono:'💈' },
+  { id:'preferencia-ambos',  nombre:'Recorte + Barba y Cejas',       precio:30, duracion:'30 min', icono:'💈' },
+  { id:'fade',               nombre:'Fade',                          precio:20, duracion:'30 min', icono:'💈' },
+  { id:'taper',              nombre:'Taper',                         precio:20, duracion:'30 min', icono:'💈' },
+  { id:'blowout',            nombre:'Blowout',                       precio:20, duracion:'30 min', icono:'💈' },
 ];
 
 // Horarios reales por día de la semana (0=Dom, 1=Lun … 6=Sab)
@@ -784,13 +790,13 @@ const SERVICIOS = [
 
 
 const HORARIO_SEMANAL = {
-  0: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM'],
-  1: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM'],
-  2: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM'],
-  3: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM'],
-  4: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM'],
-  5: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM'],
-  6: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM','6:00 PM','6:30 PM'],
+  0: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'],
+  1: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'],
+  2: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'],
+  3: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'],
+  4: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'],
+  5: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'],
+  6: ['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'],
 };
 
 
