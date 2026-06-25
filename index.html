@@ -392,17 +392,15 @@ ul{list-style:none}
         <p class="section-label">Lo que hacemos</p>
         <h2 class="section-title">Nuestros servicios</h2>
         <div class="divider-gold"></div>
-        <p style="color:var(--gris-claro);max-width:480px;font-size:.95rem;line-height:1.8">Cada servicio es realizado con productos premium y técnicas perfeccionadas durante años. El arreglo de barba y cejas tienen un costo adicional de $5 cada uno.
+        <p style="color:var(--gris-claro);max-width:480px;font-size:.95rem;line-height:1.8">Cada servicio es realizado con productos premium y técnicas perfeccionadas durante años.
         </p>
       </div>
       <div class="servicios-grid">
-        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte de Preferencia</h3><p class="servicio-desc">El corte que tú eliges, adaptado a tu estilo y preferencia personal.</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
-        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte + Barba</h3><p class="servicio-desc">Recorte de preferencia más arreglo de barba incluido.</p><p class="servicio-precio">$25 <span>/ 30 min</span></p></div>
-        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte + Cejas</h3><p class="servicio-desc">Recorte de preferencia más arreglo de cejas incluido.</p><p class="servicio-precio">$25 <span>/ 30 min</span></p></div>
-        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte + Barba y Cejas</h3><p class="servicio-desc">Recorte de preferencia más arreglo de barba y cejas incluido.</p><p class="servicio-precio">$30 <span>/ 30 min</span></p></div>
-        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Fade</h3><p class="servicio-desc">Degradado a máquina con transiciones perfectas de bajo a alto.</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
-        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Taper</h3><p class="servicio-desc">Corte con degradado suave y natural hacia los lados y la nuca.</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
-        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Blowout</h3><p class="servicio-desc">Volumen y definición con acabado limpio y profesional.</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
+        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte de Preferencia</h3><p class="servicio-desc">El corte que tú eliges, adaptado a tu estilo y preferencia personal. Incluye Cejas</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
+        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Recorte + Barba</h3><p class="servicio-desc">Recorte de preferencia más arreglo de barba incluido. Incluye Cejas</p><p class="servicio-precio">$25 <span>/ 30 min</span></p></div>
+        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Fade</h3><p class="servicio-desc">Degradado a máquina con transiciones perfectas de bajo a alto. Incluye Cejas</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
+        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Taper Fade</h3><p class="servicio-desc">Corte con degradado suave y natural hacia los lados y la nuca. Incluye Cejas</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
+        <div class="servicio-card"><span class="servicio-icon">💈</span><h3 class="servicio-nombre">Blowout</h3><p class="servicio-desc">Volumen y definición con acabado limpio y profesional. Incluye Cejas</p><p class="servicio-precio">$20 <span>/ 30 min</span></p></div>
       </div>
       <div style="margin-top:48px;text-align:center">
         <button class="btn btn-primary" onclick="showPage('reserva')">Reservar ahora</button>
@@ -776,13 +774,11 @@ initCarousel();
 
 // ── RESERVAS ──
 const SERVICIOS = [
-  { id:'preferencia',        nombre:'Recorte de Preferencia',        precio:20, duracion:'30 min', icono:'💈' },
-  { id:'preferencia-barba',  nombre:'Recorte + Barba',               precio:25, duracion:'30 min', icono:'💈' },
-  { id:'preferencia-cejas',  nombre:'Recorte + Cejas',               precio:25, duracion:'30 min', icono:'💈' },
-  { id:'preferencia-ambos',  nombre:'Recorte + Barba y Cejas',       precio:30, duracion:'30 min', icono:'💈' },
-  { id:'fade',               nombre:'Fade',                          precio:20, duracion:'30 min', icono:'💈' },
-  { id:'taper',              nombre:'Taper',                         precio:20, duracion:'30 min', icono:'💈' },
-  { id:'blowout',            nombre:'Blowout',                       precio:20, duracion:'30 min', icono:'💈' },
+  { id:'preferencia',       nombre:'Recorte de Preferencia', precio:20, duracion:'30 min', icono:'💈' },
+  { id:'preferencia-barba', nombre:'Recorte + Barba',        precio:25, duracion:'30 min', icono:'💈' },
+  { id:'fade',              nombre:'Fade',                   precio:20, duracion:'30 min', icono:'💈' },
+  { id:'taper',             nombre:'Taper Fade',             precio:20, duracion:'30 min', icono:'💈' },
+  { id:'blowout',           nombre:'Blowout',                precio:20, duracion:'30 min', icono:'💈' },
 ];
 
 // Horarios reales por día de la semana (0=Dom, 1=Lun … 6=Sab)
